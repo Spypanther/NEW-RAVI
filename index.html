@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Video Editor — Portfolio</title>
+  <meta name="description" content="Portfolio of a professional video editor — showreel, projects, testimonials, and contact." />
+</head>
+
+<body>
+  <!-- HEADER / NAV -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">RAVI RAJ<span class="dot">.</span></a>
+      <nav class="nav">
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu">☰</button>
+        <ul class="nav-list" id="navList">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CSS (placed under the header as requested) -->
+  <style>
+    :root{
+      --dark: #0f1113;
+      --charcoal: #1b1e20;
+      --mid-gray: #9ea4a8;
+      --light-gray: #f4f5f6;
+      --white: #ffffff;
+      --glass: rgba(255,255,255,0.04);
+      --max-width: 1100px;
+      --radius: 14px;
+      --transition: 250ms ease;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--light-gray);
+      background: linear-gradient(180deg, var(--dark) 0%, #0b0c0d 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px;}
+
+    /* Header */
+    .site-header{
+      position:sticky;top:0;z-index:60;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(15,17,19,0.9), rgba(15,17,19,0.6));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+    .brand{font-weight:700;color:var(--white);text-decoration:none;font-size:1.15rem;letter-spacing:0.4px}
+    .brand .dot{color:var(--mid-gray);margin-left:6px}
+
+    .nav-list{list-style:none;display:flex;gap:18px;margin:0;padding:0;align-items:center}
+    .nav-list a{color:var(--mid-gray);text-decoration:none;font-weight:600;font-size:0.95rem;padding:8px;border-radius:8px;transition:color var(--transition),background var(--transition)}
+    .nav-list a:hover{color:var(--white);background:rgba(255,255,255,0.02)}
+
+    .nav-toggle{display:none;background:none;border:none;color:var(--mid-gray);font-size:1.2rem}
+
+    /* HERO */
+    #home{padding:48px 0 28px;}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center}
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      padding:28px;border-radius:16px;box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    .hero h1{margin:0 0 12px;color:var(--white);font-size:2rem}
+    .hero p{margin:0 0 18px;color:var(--mid-gray)}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid rgba(255,255,255,0.04);
+      background:transparent;color:var(--white);cursor:pointer;transition:transform var(--transition),background var(--transition);
+    }
+    .btn.secondary{background:rgba(255,255,255,0.03);color:var(--light-gray)}
+    .btn:active{transform:translateY(1px)}
+     .img{
+         height: 40vh;
+         width: 40vh;
+    }
+    /* SHOWREEL box */
+    .reel{
+        height: 40vh;
+        width: 40vh;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);
+    }
+    .reel video{display:block;width:100%;height:100%;max-height:320px;object-fit:cover;filter:grayscale(0.02) contrast(0.95)}
+
+    /* WORK Section */
+    #work{padding:36px 0}
+    .section-title{display:flex;align-items:end;justify-content:space-between;margin-bottom:18px}
+    .section-title h2{color:var(--white);margin:0;font-size:1.15rem}
+    .filters{display:flex;gap:10px;align-items:center}
+    .filter-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px 10px;border-radius:8px;color:var(--mid-gray);cursor:pointer}
+    .filter-btn.active{background:rgba(255,255,255,0.03);color:var(--white)}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:var(--charcoal);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition);
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .card .thumb{position:relative;height:180px;overflow:hidden;background:#000}
+    .card img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.65)}
+    .card .meta{padding:12px}
+    .card h3{margin:0 0 6px;font-size:1rem;color:var(--white)}
+    .card p{margin:0;font-size:0.85rem;color:var(--mid-gray)}
+
+    /* Modal */
+    .modal{
+      position:fixed;inset:0;display:none;place-items:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.85));z-index:120;padding:32px;
+    }
+    .modal.open{display:grid}
+    .modal-content{width:100%;max-width:980px;background:var(--charcoal);border-radius:12px;border:1px solid rgba(255,255,255,0.04);overflow:hidden}
+    .modal-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.02)}
+    .modal-title{color:var(--white);font-weight:700}
+    .modal-body{padding:16px;display:grid;grid-template-columns:1fr 320px;gap:14px}
+    .modal-meta{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:12px;border-radius:10px}
+
+    /* Testimonials & About */
+    #about, #testimonials{padding:36px 0}
+    .about-grid{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start}
+    .card-soft{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+    /* FOOTER / CONTACT */
+    #contact{padding:36px 0}
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    form input, form textarea{
+      width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--light-gray);margin-bottom:10px;font-size:0.95rem;
+    }
+    .muted{color:var(--mid-gray);font-size:0.9rem}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:16px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .modal-body{grid-template-columns:1fr}
+      .about-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:640px){
+      .nav-list{display:none}
+      .nav-toggle{display:block}
+      .grid{grid-template-columns:1fr}
+      .hero h1{font-size:1.6rem}
+    }
+
+    /* small util */
+    .kbd{background:#0b0b0c;padding:4px 8px;border-radius:6px;font-size:0.85rem;color:var(--mid-gray)}
+  </style>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <!-- HOME / HERO -->
+    <section id="home">
+      <div class="hero">
+        <div class="hero-card">
+          <h1>Hi, I'm <span style="color:var(--mid-gray)">Ravi Raj</span> — Video Editor</h1>
+          <p>Story-driven edits · commercial spots · social reels · narrative pacing. I craft edits that sharpen message and lift emotion. Scroll to see selected projects with context.</p>
+          <div class="cta-row">
+            <button class="btn" id="watchReel">Watch Showreel</button>
+            <a class="btn secondary" href="#contact">Hire me</a>
+            <a class="btn" id="downloadCv" href="#" onclick="downloadCV()">Download CV</a>
+          </div>
+          <p class="muted" style="margin-top:14px">Tip: Click any project to open full player and case notes. Press <span class="kbd">Esc</span> to close the player.</p>
+        </div>
+
+        <div>
+          <div class="reel">
+            <!-- brief auto-play muted reel preview (loop) -->
+            <img src="ravi.jpg" alt="" class="img">
+              <!-- replace src with your compiled showreel file -->
+              Your browser does not support HTML video.
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <div class="section-title">
+        <h2>Selected Work</h2>
+        <div class="filters" id="filterRow">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="commercial">Commercial</button>
+          <button class="filter-btn" data-filter="social">Social</button>
+          <button class="filter-btn" data-filter="shortform">Short Form</button>
+        </div>
+      </div>
+
+      <div class="grid" id="projectsGrid" aria-live="polite">
+        <!-- JS will inject project cards -->
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-title"><h2>About</h2><div></div></div>
+      <div class="about-grid">
+        <div class="card-soft">
+          <h3 style="margin-top:0;color:var(--white)">Background</h3>
+          <p class="muted">I'm a professional editor. I work with Adobe Premiere, After Effects, DaVinci Resolve, and collaborative versioning tools for remote teams.</p>
+          <ul class="muted" style="margin-top:12px">
+            <li>Specialties: Narrative pacing, VFX compositing, color timing</li>
+            <li>Availability: Remote / contract</li>
+          </ul>
+        </div>
+
+        <div class="card-soft">
+          <h3 style="margin-top:0;color:var(--white)">Services & Process</h3>
+          <p class="muted">I deliver polished cuts from rough assembly to final colour and deliverables. Typical workflow: Sync & organize → Assembly → Fine cut → Client revisions → Sound mix → Final deliverables.</p>
+          <div style="margin-top:10px">
+            <strong class="muted">Rates</strong>
+            <p class="muted" style="margin:6px 0 0">Custom quotes as per the project.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title"><h2>Contact</h2><div></div></div>
+      <div class="contact-grid">
+        <div class="card-soft">
+          <h3 style="margin-top:0;color:var(--white)">Let's collaborate</h3>
+          <form id="contactForm" onsubmit="sendMail(event)">
+            <input id="name" type="text" placeholder="Your name" required />
+            <input id="email" type="email" placeholder="Email" required />
+            <input id="subject" type="text" placeholder="Project / subject" />
+            <textarea id="message" rows="5" placeholder="Brief project details (timeline, deliverables)"></textarea>
+            <button class="btn" type="submit">Send message</button>
+          </form>
+        </div>
+
+        <div class="card-soft">
+          <h3 style="margin-top:0;color:var(--white)">Quick info</h3>
+          <p class="muted"><strong>Email:</strong>  <a href="ravirj9155@gmail.com"  style="color:var(--mid-gray)">ravirj9155@gmail.com</a></p>
+          <p class="muted"><strong>Linked In:</strong> <a href="https://www.linkedin.com/in/ravi-raj-aa2304276?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"  style="color:var(--mid-gray)">Ravi Raj</a></p>
+          <p class="muted"><strong>youtube:</strong> <a href="https://www.youtube.com/@newrise07" style="color:var(--mid-gray)">The What Factor</a></p>
+          <p class="muted"><strong>Location:</strong> Remote </p>
+          <p class="muted" style="margin-top:12px">Available for freelance & long-term contracts. Typical response time: 24–48 hours.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal (player + project notes) -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content" role="document">
+      <div class="modal-top">
+        <div class="modal-title" id="modalTitle">Project</div>
+        <button class="btn" id="closeModal" aria-label="Close">Close</button>
+      </div>
+      <div class="modal-body">
+        <div id="modalPlayer">
+          <!-- video injected here -->
+        </div>
+        <div class="modal-meta" id="modalMeta">
+          <!-- project details injected here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer style="padding:28px 0;text-align:center;color:var(--mid-gray)">
+    <div class="container">© <span id="year"></span> Your Name • Video Editor</div>
+  </footer>
+
+  <!-- SCRIPT: dynamic rendering + interaction -->
+  <script>
+    // ====== PROJECT DATA (edit / add your projects here) ======
+    // Each project: { id, title, category, poster, src, year, client, description, credits }
+    const projects = [
+      {
+        id: 'p1',
+        title: 'Showreel — Highlights',
+        category: 'shortform',
+         poster: 'short2.png',
+        src: 'videoplayback (11) (online-video-cutter.com).mp4',
+        year: 2025,
+        client: 'Personal',
+        description: 'A compilation reel showcasing commercial and narrative edits.',
+        credits: 'Color grading, sound design: me'
+      },
+      {
+        id: 'p2',
+        title: 'Showreel — Highlights',
+        category: 'shortform',
+         poster: 'short1.png',
+        src: 'videoplayback (10) (online-video-cutter.com).mp4',
+        year: 2025,
+        client: 'Personal',
+        description: 'A compilation reel showcasing commercial and narrative edits.',
+        credits: 'Color grading, sound design: me'
+      },
+      {
+        id: 'p3',
+        title: 'Showreel — Highlights',
+        category: 'shortform',
+         poster: 'short3.png',
+        src: 'videoplayback (12) (online-video-cutter.com).mp4',
+        year: 2025,
+        client: 'Personal',
+        description: 'A compilation reel showcasing commercial and narrative edits.',
+        credits: 'Color grading, sound design: me'
+      },
+      {
+        id: 'p4',
+        title: 'Brand Spot — ACME',
+        category: 'social',
+        poster: 'long2.png',
+        src: 'Untitled design (2).mp4',
+        year: 2024,
+        client: 'ACME Co.',
+        description: '30s brand ad focusing on storytelling pacing and product reveal.',
+        credits: 'Edit + color'
+      },
+      {
+        id: 'p5',
+        title: 'Social Series — Quick Cuts',
+        category: 'social',
+        poster: 'long3.png',
+        src: 'Untitled design (1).mp4',
+        year: 2025,
+        client: 'Social Campaign',
+        description: 'Fast-paced edits for short-form social distribution with multiple aspect ratios.',
+        credits: 'Edit + sound sync'
+      },
+      {
+        id: 'p6',
+        title: 'Social Series — Quick Cuts',
+        category: 'social',
+        poster: 'long1.png',
+        src: 'Untitled design.mp4',
+        year: 2025,
+        client: 'Social Campaign',
+        description: 'Fast-paced edits for short-form social distribution with multiple aspect ratios.',
+        credits: 'Edit + sound sync'
+      }
+    ];
+
+    // ====== UTILITIES & RENDER ======
+    const grid = document.getElementById('projectsGrid');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalPlayer = document.getElementById('modalPlayer');
+    const modalMeta = document.getElementById('modalMeta');
+    const yearNode = document.getElementById('year');
+    yearNode.textContent = new Date().getFullYear();
+
+    function createCard(p) {
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.tabIndex = 0;
+      el.setAttribute('data-id', p.id);
+      el.innerHTML = `
+        <div class="thumb">
+          <img loading="lazy" src="${p.poster}" alt="${p.title} poster">
+        </div>
+        <div class="meta">
+          <h3>${p.title}</h3>
+          <p>${p.client} • ${p.year} • ${p.category}</p>
+        </div>
+      `;
+      el.addEventListener('click', ()=>openProject(p.id));
+      el.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ openProject(p.id) }});
+      return el;
+    }
+
+    function renderGrid(list){
+      grid.innerHTML = '';
+      list.forEach(p=>grid.appendChild(createCard(p)));
+    }
+
+    // Initial render
+    renderGrid(projects);
+
+    // FILTERS
+    document.getElementById('filterRow').addEventListener('click', (e)=>{
+      const btn = e.target.closest('.filter-btn');
+      if(!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      if(f === 'all') renderGrid(projects);
+      else renderGrid(projects.filter(p=>p.category === f));
+    });
+
+    // OPEN MODAL & PLAY
+    function openProject(id){
+      const p = projects.find(x=>x.id===id);
+      if(!p) return;
+      modalTitle.textContent = p.title;
+      modalPlayer.innerHTML = `
+        <video id="player" controls playsinline style="width:100%;height:100%;max-height:520px;background:#000">
+          <source src="${p.src}" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      `;
+      modalMeta.innerHTML = `
+        <h3 style="margin-top:0;color:var(--white)">${p.title}</h3>
+        <p class="muted">${p.client} • ${p.year} • ${p.category}</p>
+        <p style="margin-top:10px;color:var(--light-gray)}">${p.description}</p>
+        <p class="muted" style="margin-top:10px"><strong>Credits:</strong> ${p.credits}</p>
+        <div style="margin-top:12px">
+          <a class="btn" href="${p.src}" target="_blank" rel="noopener">Open Source</a>
+          <button class="btn secondary" onclick="downloadProject('${p.src}')">Download</button>
+        </div>
+      `;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+
+      // focus & autoplay
+      setTimeout(()=> {
+        const vid = document.getElementById('player');
+        if(vid) vid.play().catch(()=>{ /* autoplay may be blocked */ });
+        vid && vid.focus();
+      },150);
+    }
+
+    // CLOSE modal
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal();});
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal();});
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      modalPlayer.innerHTML = '';
+      modalMeta.innerHTML = '';
+    }
+
+    // SHOWREEL action
+    document.getElementById('watchReel').addEventListener('click', ()=> openProject('p1'));
+
+    // Download handlers (simple)
+    function downloadProject(src){
+      // open in new tab; user can save
+      window.open(src, '_blank');
+    }
+    function downloadCV(){
+      // stub - replace with actual CV file path
+      const cvUrl = '#'; // set to '/assets/CV-YourName.pdf'
+      if(cvUrl === '#' ) { alert('! Currently not available !'); return; }
+      window.open(cvUrl, '_blank');
+    }
+
+    // Basic contact form: uses mailto as fallback
+    function sendMail(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim() || 'Project enquiry';
+      const message = document.getElementById('message').value.trim();
+      // Use mailto fallback
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      const mailto = `mailto:youremail@example.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      window.location.href = mailto;
+    }
+
+    // small nav toggle for mobile
+    document.getElementById('navToggle').addEventListener('click', ()=>{
+      const nav = document.getElementById('navList');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      nav.style.flexDirection = 'column';
+      nav.style.background = 'transparent';
+      nav.style.gap = '8px';
+      nav.style.paddingTop = '8px';
+    });
+
+  </script>
+</body>
+</html>
